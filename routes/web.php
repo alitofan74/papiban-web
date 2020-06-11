@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//
+Route::get("/mimin", "adminController@index");
+
+//
+Route::get("/mimin/tambal+ban", "tambalBanController@index");
+
+//
+Route::get("/mimin/komentar", "komentarController@index");
+
+//
+Route::get("/mimin/member", "memberController@index");
+
+//x
+Route::get("/mimin/pesan", "pesanController@index");
+
