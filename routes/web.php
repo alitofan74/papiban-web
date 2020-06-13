@@ -36,3 +36,9 @@ Route::get("/login", "authController@login");
 
 Route::get("/register", "authController@register");
 
+Route::get('/firebase','authController@index');
+
+Route::get('/getdata','authController@getData');
+
+Route::post('/create','authController@insert');
+

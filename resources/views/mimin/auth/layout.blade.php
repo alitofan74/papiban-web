@@ -10,6 +10,7 @@
   <title>Papi Tambal Ban</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{asset('admin-templ/assets/css/app.min.css')}}">
+  <link rel="stylesheet" href="{{asset('admin-templ/assets/bundles/izitoast/css/iziToast.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin-templ/assets/bundles/jquery-selectric/selectric.css')}}">
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{asset('admin-templ/assets/css/style.css')}}">
@@ -18,10 +19,10 @@
   <link rel="stylesheet" href="{{asset('admin-templ/assets/css/custom.css')}}">
   <link rel='shortcut icon' type='image/x-icon' href="{{url('img\logo.ico')}}" />
   <style>
-        body{
-            background-color: #E5E9F4;
-        }
-        </style>
+    body {
+      background-color: #E5E9F4;
+    }
+  </style>
 </head>
 
 <body>
@@ -40,12 +41,33 @@
   <!-- JS Libraies -->
   <script src="{{asset('admin-templ/assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js')}}"></script>
   <script src="{{asset('admin-templ/assets/bundles/jquery-selectric/jquery.selectric.min.js')}}"></script>
+  <script src="{{asset('admin-templ/assets/bundles/izitoast/js/iziToast.min.js')}}"></script>
   <!-- Page Specific JS File -->
   <script src="{{asset('admin-templ/assets/js/page/auth-register.js')}}"></script>
   <!-- Template JS File -->
   <script src="{{asset('admin-templ/assets/js/scripts.js')}}"></script>
   <!-- Custom JS File -->
   <script src="{{asset('admin-templ/assets/js/custom.js')}}"></script>
+  <script>
+    setTimeout(function() {
+      $('#alertregis').fadeOut('slow');
+    }, 3000);
+
+    function checkPassword(form) {
+      password1 = form.password.value;
+      password2 = form.passwordconfirm.value;
+
+      // If Not same return False.     
+      if (password1 != password2) {
+        iziToast.error({
+          title: 'Error!',
+          message: 'Password not match',
+          position: 'topRight'
+        });
+        return false;
+      }
+    }
+  </script>
 </body>
 
 
