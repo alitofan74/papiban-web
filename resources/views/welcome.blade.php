@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{asset('bootstrap-4.5.0\dist\css\bootstrap.css')}}">
         <style>
         body{
-            font-family: 'Arial Narrow', Arial, sans-serif;
+            font-family: "Nunito", "Segoe UI", arial;
         }
         #head{
             color:#557cf3;
@@ -26,13 +26,13 @@
         </div>
         <div class="row">
             <div class="col-8">
-                <img src="{{url('img\teropong.png')}}" alt="" srcset="" class="img img-responsive" width="90%">
+                <img src="{{url('img\teropong.png')}}" alt="" srcset="" class="img img-responsive" width="100%">
             </div>
             <div class="col-4" style="padding-top:10em;">
                 <h4>Salam Warga Malang,</h4>
                 <h6><p>Aplikasi untuk mencari tempat tambal ban, sesuai lokasi terdekat, atau pun sesuai dengan keinginan anda</p></h6>
                 <br>
-                <button style="width:60%;border-radius:15px;" class="btn btn-primary">LOGIN</button>
+                <a style="width:60%;border-radius:15px;" class="btn btn-primary" href="{{url('/login')}}">LOGIN</a>
             </div>
         </div>
     </div>

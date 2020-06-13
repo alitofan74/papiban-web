@@ -32,3 +32,7 @@ Route::get("/mimin/member", "memberController@index");
 //x
 Route::get("/mimin/pesan", "pesanController@index");
 
+Route::get("/login", "authController@login");
+
+Route::get("/register", "authController@register");
+
