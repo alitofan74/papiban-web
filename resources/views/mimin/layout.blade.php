@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{asset('admin-templ/assets/css/components.css')}}">
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="{{asset('admin-templ/assets/css/custom.css')}}">
+  <link rel="stylesheet" href="{{asset('admin-templ/assets/bundles/izitoast/css/iziToast.min.css')}}">
   <link rel='shortcut icon' type='image/x-icon' href="{{url('img\logo.ico')}}" />
   @yield('css')
 </head>
@@ -88,6 +89,7 @@
              @yield('body')
           </div>
         </section>
+        @yield('modal')
         <!-- <div class="settingSidebar">
           <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
           </a>
@@ -201,6 +203,7 @@
   <script src="{{asset('admin-templ/assets/js/scripts.js')}}"></script>
   <!-- Custom JS File -->
   <script src="{{asset('admin-templ/assets/js/custom.js')}}"></script>
+  <script src="{{asset('admin-templ/assets/bundles/izitoast/js/iziToast.min.js')}}"></script>
   @yield('script')
 </body>
 

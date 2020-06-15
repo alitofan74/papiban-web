@@ -38,6 +38,14 @@ return [
         'client_email' => env('FIREBASE_CLIENT_EMAIL', 'e@email.com'),
         'client_id' => env('FIREBASE_CLIENT_ID', ''),
         'client_x509_cert_url' => env('FIREBASE_CLIENT_x509_CERT_URL', ''),
+
+        'api_key' => 'AIzaSyAYtZkvDCJAyfGgR_8aj-BrlBUfZ98o90c', // Only used for JS integration
+        'auth_domain' => 'intro-2b6f3.firebaseapp.com', // Only used for JS integration
+        'database_url' => 'https://intro-2b6f3.firebaseio.com',
+        'storage_bucket' => 'intro-2b6f3.appspot.com', // Only used for JS integration
+        'appId' => '1:893093757854:web:5bc406debf41ee71818c8f',
+        'messagingSenderId'=> '893093757854',
+        'project_id'=>'intro-2b6f3',
     ]
 
 ];
