@@ -654,7 +654,7 @@ $(function () {
       $("body").removeClass();
       $("body").addClass("light");
       $("body").addClass("light-sidebar");
-      $("body").addClass("theme-white");
+      $("body").addClass("theme-purple");
 
       $(".choose-theme li").removeClass("active");
       $(".choose-theme li[title|='white']").addClass("active");
@@ -677,7 +677,7 @@ $(function () {
     $("body").removeClass();
     jQuery("body").addClass("light");
     jQuery("body").addClass("light-sidebar");
-    jQuery("body").addClass("theme-white");
+    jQuery("body").addClass("theme-purple");
 
     // set default theme
     $(".choose-theme li").removeClass("active");
@@ -696,7 +696,7 @@ $(function () {
   //add default class on body tag
   jQuery("body").addClass("light");
   jQuery("body").addClass("light-sidebar");
-  jQuery("body").addClass("theme-white");
+  jQuery("body").addClass("theme-purple");
   // set theme default color
   $(".choose-theme li").removeClass("active");
   $(".choose-theme li[title|='white']").addClass("active");

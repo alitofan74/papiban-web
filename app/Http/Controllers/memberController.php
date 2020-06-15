@@ -9,6 +9,8 @@ class memberController extends Controller
     //
 
     public function index(){
-        return view("mimin.member.index");
+        $b = call_fb('get', 'users', null);
+        $data['data'] = $b;
+        return view("mimin.member.index", $data);
     }
 }

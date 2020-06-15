@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="{{asset('admin-templ/assets/css/components.css')}}">
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="{{asset('admin-templ/assets/css/custom.css')}}">
-  <link rel='shortcut icon' type='image/x-icon' href='{{asset('admin-templ/assets/img/favicon.ico')}}' />
+  <link rel='shortcut icon' type='image/x-icon' href="{{url('img\logo.ico')}}" />
   @yield('css')
 </head>
 
@@ -55,7 +55,7 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="{{asset('admin-templ/assets/img/logo.png')}}" class="header-logo" /></a>
+            <a href="index.html"> <img alt="image" src="{{url('img\logo-sidebar.png')}}" class="header-logo" style="width:60% ; height:auto;"/></a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
@@ -88,7 +88,7 @@
              @yield('body')
           </div>
         </section>
-        <div class="settingSidebar">
+        <!-- <div class="settingSidebar">
           <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
           </a>
           <div class="settingSidebar-body ps-container ps-theme-default">
@@ -178,7 +178,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <footer class="main-footer">
         <div class="footer-left">

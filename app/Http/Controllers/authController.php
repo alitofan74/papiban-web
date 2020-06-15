@@ -14,14 +14,14 @@ class authController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+    }
+
     public function index()
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/firebasekey.json');
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://intro-2b6f3.firebaseio.com/')
-            ->create();
-        $database = $firebase->getDatabase();
+
         $ref = $database->getReference('users');
         $key = $ref->push()->getKey();
         $ref->getChild($key)->set([
@@ -37,28 +37,25 @@ class authController extends Controller
 
     public function getData()
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/firebasekey.json');
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://intro-2b6f3.firebaseio.com/')
-            ->create();
-        $database   =   $firebase->getDatabase();
-        $createPost    =   $database->getReference('users')->getValue();
-        $auth = $firebase->getAuth();
-        // var_dump($auth);
-        $userProperties = [
-            'email' => 'a@gmail.com',
-            'emailVerified' => false,
-            'phoneNumber' => null,
-            'password' => '123445',
-            'displayName' => 'aaaa',
-            'photoUrl' => null,
-            'disabled' => false,
-        ];
+        $b = call_fb('get', 'users', null);
+        var_dump($b);
 
-        $auth = $firebase->getAuth();
-        $createdUser = $auth->createUser($userProperties);
-        return response()->json($createdUser);
+        // $createPost    =   $database->getReference('users')->getValue();
+        // $auth = $firebase->getAuth();
+        // var_dump($auth);
+        // $userProperties = [
+        //     'email' => 'a@gmail.com',
+        //     'emailVerified' => false,
+        //     'phoneNumber' => null,
+        //     'password' => '123445',
+        //     'displayName' => 'aaaa',
+        //     'photoUrl' => null,
+        //     'disabled' => false,
+        // ];
+
+        // $auth = $firebase->getAuth();
+        // $createdUser = $auth->createUser($userProperties);
+        // return response()->json($createdUser);
     }
 
     public function login()
@@ -86,15 +83,7 @@ class authController extends Controller
         $data = array('full_name' => $full_name, "user_name" => $user_name, "password" => $password, "email" => $email);
         // var_dump($data);
         //add realtime
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/firebasekey.json');
-        $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://intro-2b6f3.firebaseio.com/')
-            ->create();
-        $database = $firebase->getDatabase();
-        $ref = $database->getReference('users');
-        $key = $ref->push()->getKey();
-        $ref->getChild($key)->set($data);
+        $b = call_fb('create', 'users', $data);
 
         //add auth
         // $userProperties = [
