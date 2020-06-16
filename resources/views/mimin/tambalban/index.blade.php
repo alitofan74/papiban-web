@@ -306,6 +306,15 @@
         console.log($('#statustb').is(":checked"));
         console.log($('#tublestb').is(":checked"));
 
+        if (jambuka > jamtutup) {
+            iziToast.error({
+                title: 'Error!',
+                message: 'Jam buka harus kurang dari jam tutup',
+                position: 'topRight'
+            });
+            return;
+        }
+
         ref = firebase.database().ref('tambalban');
         console.log(ref)
         key = ref.push().getKey();
@@ -364,6 +373,14 @@
 
     $('#formUpdateTambalBan').on('submit', function() {
         var values = $("#formUpdateTambalBan").serializeArray();
+        if (values[2].value > values[3].value) {
+            iziToast.error({
+                title: 'Error!',
+                message: 'Jam buka harus kurang dari jam tutup',
+                position: 'topRight'
+            });
+            return;
+        }
         var postData = {
             nama: values[0].value,
             alamat: values[1].value,
