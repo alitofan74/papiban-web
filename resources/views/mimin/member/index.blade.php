@@ -19,7 +19,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody">
+                        <tbody id="tbodyMember">
                         </tbody>
                     </table>
                 </div>
@@ -160,7 +160,7 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                             </div>
-                            <input type="email" class="form-control" id="edemail" placeholder="Email" name="email" required disabled>
+                            <input type="email" class="form-control" id="edemail" placeholder="Email" name="email" required readonly="true">
                         </div>
                     </div>
                     <div class="form-group">
@@ -171,7 +171,7 @@
                                     <i class="fas fa-lock"></i>
                                 </div>
                             </div>
-                            <input type="password" class="form-control" id="edpassword" placeholder="Password" name="password" disabled required>
+                            <input type="password" class="form-control" id="edpassword" placeholder="Password" name="password" readonly="true" required>
                         </div>
                     </div>
 
@@ -211,7 +211,7 @@
                 }
                 lastIndex = index;
             });
-            $('#tbody').html(htmls);
+            $('#tbodyMember').html(htmls);
             if ($.fn.dataTable.isDataTable('#tableMember')) {
                 $('#tableMember').DataTable();
             } else {
@@ -289,7 +289,7 @@
         });
         $("#addModal").modal('hide');
         $('#tableMember').dataTable().fnDestroy();
-        $('#tbody').html("");
+        $('#tbodyMember').html("");
         getData();
     }
     console.log(firebase.auth().currentUser);
@@ -339,7 +339,7 @@
         });
         $("#updateModal").modal('hide');
         $('#tableMember').dataTable().fnDestroy();
-        $('#tbody').html("");
+        $('#tbodyMember').html("");
         getData();
         return false;
     });
@@ -371,7 +371,7 @@
         });
         $("#deleteModal").modal('hide');
         $('#tableMember').dataTable().fnDestroy();
-        $('#tbody').html("");
+        $('#tbodyMember').html("");
         getData();
         return false;
     });
