@@ -26,6 +26,8 @@ Route::get("/mimin/tambal+ban", "tambalBanController@index");
 //
 Route::get("/mimin/komentar", "komentarController@index");
 
+Route::get("/mimin/rating", "ratingController@index");
+
 //
 Route::get("/mimin/member", "memberController@index");
 
