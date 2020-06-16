@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Traits\Date;
-use Kreait\Firebase;
-use Kreait\Firebase\Factory;
 use Illuminate\Http\Request;
-use Kreait\Firebase\ServiceAccount;
 use DateTime;
 
 class authController extends Controller
@@ -23,13 +19,6 @@ class authController extends Controller
 
     public function index()
     {
-
-        $ref = $database->getReference('users');
-        $key = $ref->push()->getKey();
-        $ref->getChild($key)->set([
-            'SubjectName' => 'Laravel'
-        ]);
-        return $key;
     }
 
     public function register()
