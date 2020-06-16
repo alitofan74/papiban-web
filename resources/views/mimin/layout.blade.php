@@ -22,7 +22,7 @@
   @yield('css')
 </head>
 
-<body>
+<body onload="checkCookie()">
   <div class="loader"></div>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
@@ -40,12 +40,9 @@
         <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{asset('admin-templ/assets/img/user.png')}}" class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Hello Sarah Smith</div>
-              <a href="profile.html" class="dropdown-item has-icon"> <i class="far
-										fa-user"></i> Profile
-              </a>
+              <div class="dropdown-title">Hello <strong id="userLoginEmail"></div>
               <div class="dropdown-divider"></div>
-              <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              <a href="{{url('/login')}}" onclick="deleteCookie()" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
             </div>
@@ -74,9 +71,9 @@
             <li class="@yield('member')">
               <a href="{{url('/mimin/member')}}" class="nav-link"><i data-feather="users"></i><span>Member</span></a>
             </li>
-            <li class="@yield('pesan')">
+            <!-- <li class="@yield('pesan')">
               <a href="{{url('/mimin/pesan')}}" class="nav-link"><i data-feather="inbox"></i><span>Pesan</span></a>
-            </li>
+            </li> -->
 
           </ul>
         </aside>
@@ -219,6 +216,46 @@
     };
     firebase.initializeApp(config);
     var database = firebase.database();
+
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + d.toGMTString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          $('body').find('#userLoginEmail').html(c.substring(name.length, c.length));
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function deleteCookie(){
+      document.cookie = "userLogin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    function checkCookie() {
+      var user = getCookie("userLogin");
+      console.log(user);
+      // if (user != "") {
+      //   window.location = window.location.origin + "/mimin";
+      // } else 
+      if (user == "") {
+        console.log();
+        window.location = window.location.origin + "/login";
+      }
+    }
   </script>
   @yield('script')
 </body>
