@@ -70,50 +70,98 @@
 @endsection
 @section('script')
 <script>
-  function checkPassword(form) {
-    password1 = form.password.value;
-    password2 = form.passwordconfirm.value;
-
+  // Add Data
+  $('#formRegister').on('submit', function() {
+    console.log(values);
+    var values = $("#formRegister").serializeArray();
+    console.log(values);
+    var fullname = values[0].value;
+    var username = values[1].value;
+    var email = values[2].value;
+    var password = values[3].value;
+    var password2 = values[4].value;
     // If Not same return False.     
-    if (password1 != password2) {
+    if (password != password2) {
       iziToast.error({
         title: 'Error!',
         message: 'Password not match',
         position: 'topRight'
       });
-      return false;
+      return;
     }
-  }
-  // Add Data
-  $('#formRegister').on('submit', function() {
-    console.log(values);
-        var values = $("#formRegister").serializeArray();
-        var fullname = values[0].value;
-        var username = values[1].value;
-        var email = values[2].value;
-        var password = values[3].value;
 
-        console.log(values);
-        ref = firebase.database().ref('users');
-        console.log(ref)
-        key = ref.push().getKey();
-        console.log(key)
-        firebase.database().ref('users/' + key).set({
-            full_name: fullname,
-            user_name: username,
-            password: password,
-            email: email,
-            foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
-            created_time : Date.now()
-        })
-        $("#formRegister input").val("");
-        $("#formRegister")[0].reset();
-        iziToast.success({
-            title: 'Success!',
-            message: 'Successfully register',
-            position: 'topRight'
+    if (email.length < 4) {
+      iziToast.error({
+        title: 'Error!',
+        message: 'Please enter an email address.',
+        position: 'topRight'
+      });
+      return;
+    }
+    if (password.length < 6) {
+      iziToast.error({
+        title: 'Error!',
+        message: 'Please enter a password, min length 6.',
+        position: 'topRight'
+      });
+      return;
+    }
+    console.log(values);
+    ref = firebase.database().ref('users');
+    console.log(ref)
+    key = ref.push().getKey();
+    console.log(key)
+    handleSignUp(key, fullname, username, password, email);
+    return false;
+  });
+
+  /**
+   * Handles the sign up button press.
+   */
+  function handleSignUp(key, fullname, username, password, email) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+      console.log(user);
+      var user = firebase.auth().currentUser;
+      console.log(user);
+      createUsers(key, fullname, username, password, email);
+    }, function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode == 'auth/weak-password') {
+        iziToast.error({
+          title: 'Error!',
+          message: 'The password is too weak.',
+          position: 'topRight'
         });
-        return false;
+        return;
+      } else {
+        iziToast.error({
+          title: 'Error!',
+          message: errorMessage,
+          position: 'topRight'
+        });
+        return;
+      }
+      console.log(error);
     });
+  }
+
+  function createUsers(key, fullname, username, password, email) {
+       firebase.database().ref('users/' + key).set({
+      full_name: fullname,
+      user_name: username,
+      password: password,
+      email: email,
+      foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
+      created_time: Date.now()
+    })
+    $("#formRegister input").val("");
+    $("#formRegister")[0].reset();
+    iziToast.success({
+      title: 'Success!',
+      message: 'Successfully register',
+      position: 'topRight'
+    });
+  }
 </script>
 @endsection

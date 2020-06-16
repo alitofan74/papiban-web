@@ -160,7 +160,7 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                             </div>
-                            <input type="email" class="form-control" id="edemail" placeholder="Email" name="email" required>
+                            <input type="email" class="form-control" id="edemail" placeholder="Email" name="email" required disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -171,7 +171,7 @@
                                     <i class="fas fa-lock"></i>
                                 </div>
                             </div>
-                            <input type="password" class="form-control" id="edpassword" placeholder="Password" name="password" required>
+                            <input type="password" class="form-control" id="edpassword" placeholder="Password" name="password" disabled required>
                         </div>
                     </div>
 
@@ -238,13 +238,46 @@
         console.log(ref)
         key = ref.push().getKey();
         console.log(key)
+        handleSignUp(key, fullname, username, password, email);
+        return false;
+    });
+
+    function handleSignUp(key, fullname, username, password, email) {
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+            console.log(user);
+            var user = firebase.auth().currentUser;
+            console.log(user);
+            createUsers(key, fullname, username, password, email);
+        }, function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode == 'auth/weak-password') {
+                iziToast.error({
+                    title: 'Error!',
+                    message: 'The password is too weak.',
+                    position: 'topRight'
+                });
+                return;
+            } else {
+                iziToast.error({
+                    title: 'Error!',
+                    message: errorMessage,
+                    position: 'topRight'
+                });
+                return;
+            }
+            console.log(error);
+        });
+    }
+
+    function createUsers(key, fullname, username, password, email) {
         firebase.database().ref('users/' + key).set({
             full_name: fullname,
             user_name: username,
             password: password,
             email: email,
             foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
-            created_time : Date.now()
+            created_time: Date.now()
         })
         $("#formAddMember input").val("");
         iziToast.success({
@@ -256,12 +289,13 @@
         $('#tableMember').dataTable().fnDestroy();
         $('#tbody').html("");
         getData();
-        return false;
-    });
+    }
+    console.log(firebase.auth().currentUser);
 
     // Update Data
     var updateID = 0;
     $('body').on('click', '.updateData', function() {
+        console.log("aaaaaa");
         updateID = $(this).attr('data-id');
         firebase.database().ref('users/' + updateID).on('value', function(snapshot) {
             var values = snapshot.val();
@@ -283,7 +317,7 @@
             email: values[2].value,
             password: values[3].value,
             foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
-            created_time : Date.now()
+            created_time: Date.now()
         };
 
         var updates = {};
