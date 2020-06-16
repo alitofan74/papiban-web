@@ -3,6 +3,7 @@
 
 
 <!-- datatables.html  21 Nov 2019 03:55:21 GMT -->
+
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -37,14 +38,12 @@
           </ul>
         </div>
         <ul class="navbar-nav navbar-right">
-          <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{asset('admin-templ/assets/img/user.png')}}"
-                class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{asset('admin-templ/assets/img/user.png')}}" class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello Sarah Smith</div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Profile
-              </a> 
+              </a>
               <div class="dropdown-divider"></div>
               <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
@@ -56,7 +55,7 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="{{url('img\logo-sidebar.png')}}" class="header-logo" style="width:60% ; height:auto;"/></a>
+            <a href="index.html"> <img alt="image" src="{{url('img\logo-sidebar.png')}}" class="header-logo" style="width:60% ; height:auto;" /></a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
@@ -64,21 +63,21 @@
               <a href="{{url('/mimin')}}" class="nav-link"><i data-feather="monitor"></i><span>Beranda</span></a>
             </li>
             <li class="@yield('tambalban')">
-               <a href="{{url('/mimin/tambal+ban')}}" class="nav-link"><i data-feather="circle"></i><span>Tambal Ban</span></a>
-             </li>
-             <li class="@yield('komentar')">
-               <a href="{{url('/mimin/komentar')}}" class="nav-link"><i data-feather="list"></i><span>Komentar</span></a>
-             </li>
-             <li class="@yield('rating')">
-               <a href="{{url('/mimin/rating')}}" class="nav-link"><i data-feather="star"></i><span>Rating</span></a>
-             </li>
-             <li class="@yield('member')">
-               <a href="{{url('/mimin/member')}}" class="nav-link"><i data-feather="users"></i><span>Member</span></a>
-             </li>
-             <li class="@yield('pesan')">
-               <a href="{{url('/mimin/pesan')}}" class="nav-link"><i data-feather="inbox"></i><span>Pesan</span></a>
-             </li>
-            
+              <a href="{{url('/mimin/tambal+ban')}}" class="nav-link"><i data-feather="circle"></i><span>Tambal Ban</span></a>
+            </li>
+            <li class="@yield('komentar')">
+              <a href="{{url('/mimin/komentar')}}" class="nav-link"><i data-feather="list"></i><span>Komentar</span></a>
+            </li>
+            <li class="@yield('rating')">
+              <a href="{{url('/mimin/rating')}}" class="nav-link"><i data-feather="star"></i><span>Rating</span></a>
+            </li>
+            <li class="@yield('member')">
+              <a href="{{url('/mimin/member')}}" class="nav-link"><i data-feather="users"></i><span>Member</span></a>
+            </li>
+            <li class="@yield('pesan')">
+              <a href="{{url('/mimin/pesan')}}" class="nav-link"><i data-feather="inbox"></i><span>Pesan</span></a>
+            </li>
+
           </ul>
         </aside>
       </div>
@@ -86,7 +85,7 @@
       <div class="main-content">
         <section class="section">
           <div class="section-body">
-             @yield('body')
+            @yield('body')
           </div>
         </section>
         @yield('modal')
@@ -204,9 +203,27 @@
   <!-- Custom JS File -->
   <script src="{{asset('admin-templ/assets/js/custom.js')}}"></script>
   <script src="{{asset('admin-templ/assets/bundles/izitoast/js/iziToast.min.js')}}"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "{{ config('services.firebase.api_key') }}",
+      authDomain: "{{ config('services.firebase.auth_domain') }}",
+      databaseURL: "{{ config('services.firebase.database_url') }}",
+      storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+      projectId: "{{ config('services.firebase.project_id') }}",
+      messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
+      appId: "{{ config('services.firebase.appId') }}",
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+  </script>
   @yield('script')
 </body>
 
 
 <!-- datatables.html  21 Nov 2019 03:55:25 GMT -->
+
 </html>

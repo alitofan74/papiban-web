@@ -48,26 +48,28 @@
   <script src="{{asset('admin-templ/assets/js/scripts.js')}}"></script>
   <!-- Custom JS File -->
   <script src="{{asset('admin-templ/assets/js/custom.js')}}"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
   <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "{{ config('services.firebase.api_key') }}",
+      authDomain: "{{ config('services.firebase.auth_domain') }}",
+      databaseURL: "{{ config('services.firebase.database_url') }}",
+      storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+      projectId: "{{ config('services.firebase.project_id') }}",
+      messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
+      appId: "{{ config('services.firebase.appId') }}",
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
     setTimeout(function() {
       $('#alertregis').fadeOut('slow');
     }, 3000);
-
-    function checkPassword(form) {
-      password1 = form.password.value;
-      password2 = form.passwordconfirm.value;
-
-      // If Not same return False.     
-      if (password1 != password2) {
-        iziToast.error({
-          title: 'Error!',
-          message: 'Password not match',
-          position: 'topRight'
-        });
-        return false;
-      }
-    }
   </script>
+  @yield('script')
 </body>
 
 

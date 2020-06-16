@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Traits\Date;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
 use Illuminate\Http\Request;
 use Kreait\Firebase\ServiceAccount;
+use DateTime;
 
 class authController extends Controller
 {
@@ -80,7 +82,9 @@ class authController extends Controller
         $password = $request->input('password');
         $password_confirm = $request->input('passwordconfirm');
         $email = $request->input('email');
-        $data = array('full_name' => $full_name, "user_name" => $user_name, "password" => $password, "email" => $email);
+        $foto = "http://shyntadarmawan.000webhostapp.com/assets/user.png";
+        $createdTime = new DateTime();
+        $data = array('full_name' => $full_name, "user_name" => $user_name, "password" => $password, "email" => $email, "foto"=> $foto, "created_time"=>$createdTime);
         // var_dump($data);
         //add realtime
         $b = call_fb('create', 'users', $data);

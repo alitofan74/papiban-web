@@ -186,24 +186,9 @@
 </div>
 @endsection
 @section('script')
-<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "{{ config('services.firebase.api_key') }}",
-        authDomain: "{{ config('services.firebase.auth_domain') }}",
-        databaseURL: "{{ config('services.firebase.database_url') }}",
-        storageBucket: "{{ config('services.firebase.storage_bucket') }}",
-        projectId: "{{ config('services.firebase.project_id') }}",
-        messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
-        appId: "{{ config('services.firebase.appId') }}",
-    };
-    console.log(config)
-    firebase.initializeApp(config);
 
-    var database = firebase.database();
+<script>
+    console.log(config)
 
     var lastIndex = 0;
 
@@ -257,7 +242,9 @@
             full_name: fullname,
             user_name: username,
             password: password,
-            email: email
+            email: email,
+            foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
+            created_time : Date.now()
         })
         $("#formAddMember input").val("");
         iziToast.success({
@@ -294,7 +281,9 @@
             full_name: values[0].value,
             user_name: values[1].value,
             email: values[2].value,
-            password: values[3].value
+            password: values[3].value,
+            foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
+            created_time : Date.now()
         };
 
         var updates = {};
@@ -318,6 +307,7 @@
     $("body").on('click', '.removeData', function() {
         var id = $(this).attr('data-id');
         var fullName = $(this).attr('data-fullname');
+        console.log(id, fullName)
         $('body').find('#fullName').html(fullName);
         $('body').find('#formDelMember').append('<input name="id" type="hidden" value="' + id + '">');
     });

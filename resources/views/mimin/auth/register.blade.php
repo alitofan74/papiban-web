@@ -17,8 +17,7 @@
         <h4>Signup to Papi Tambal Ban</h4>
       </div>
       <div class="card-body">
-        <form method="post" action="{{ action('authController@insert') }}" onSubmit="return checkPassword(this)">
-          {{ csrf_field() }}
+        <form class="" id="formRegister" method="POST" action="" onsubmit="return false">
           <div class="row">
             <div class="form-group col-6">
               <label for="full_name">Full Name <span class="text-danger">*</span></label>
@@ -56,7 +55,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitFormRegister">
               Create Account
             </button>
           </div>
@@ -68,4 +67,53 @@
     </div>
   </div>
 </div>
+@endsection
+@section('script')
+<script>
+  function checkPassword(form) {
+    password1 = form.password.value;
+    password2 = form.passwordconfirm.value;
+
+    // If Not same return False.     
+    if (password1 != password2) {
+      iziToast.error({
+        title: 'Error!',
+        message: 'Password not match',
+        position: 'topRight'
+      });
+      return false;
+    }
+  }
+  // Add Data
+  $('#formRegister').on('submit', function() {
+    console.log(values);
+        var values = $("#formRegister").serializeArray();
+        var fullname = values[0].value;
+        var username = values[1].value;
+        var email = values[2].value;
+        var password = values[3].value;
+
+        console.log(values);
+        ref = firebase.database().ref('users');
+        console.log(ref)
+        key = ref.push().getKey();
+        console.log(key)
+        firebase.database().ref('users/' + key).set({
+            full_name: fullname,
+            user_name: username,
+            password: password,
+            email: email,
+            foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
+            created_time : Date.now()
+        })
+        $("#formRegister input").val("");
+        $("#formRegister")[0].reset();
+        iziToast.success({
+            title: 'Success!',
+            message: 'Successfully register',
+            position: 'topRight'
+        });
+        return false;
+    });
+</script>
 @endsection
