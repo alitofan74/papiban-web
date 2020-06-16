@@ -35,7 +35,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="formModal">Add Member</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close removeDataAdd" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -49,7 +49,7 @@
                                     <i class="fas fa-user"></i>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Full Name" name="fullname" required>
+                            <input type="text" class="form-control" placeholder="Full Name" name="fullname" autofocus required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,7 +88,7 @@
 
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary removeDataAdd" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="subAddMember">Save</button>
                 </div>
             </form>
@@ -124,7 +124,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="formModal">Update Member</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close removeDataUpdate" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -177,7 +177,7 @@
 
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary removeDataUpdate" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="subUpdateMember">Save</button>
                 </div>
             </form>
@@ -194,9 +194,11 @@
 
     // Get Data
     function getData() {
+        console.log("first");
         firebase.database().ref('users/').on('value', function(snapshot) {
             var value = snapshot.val();
             var htmls = [];
+            console.log(value)
             $.each(value, function(index, value) {
                 if (value) {
                     htmls.push('<tr>\
@@ -292,6 +294,11 @@
     }
     console.log(firebase.auth().currentUser);
 
+    $('.removeDataAdd').click(function() {
+        $("#formAddMember input").val("");
+        $("#formAddMember")[0].reset();
+    });
+
     // Update Data
     var updateID = 0;
     $('body').on('click', '.updateData', function() {
@@ -337,6 +344,11 @@
         return false;
     });
 
+    $('.removeDataUpdate').click(function() {
+        $("#formUpdateMember input").val("");
+        $("#formUpdateMember")[0].reset();
+    });
+
     // Remove Data
     $("body").on('click', '.removeData', function() {
         var id = $(this).attr('data-id');
@@ -365,6 +377,8 @@
     });
     $('.removeDataDel').click(function() {
         $('body').find('#formDelMember').find("input").remove();
+        $("#formDelMember input").val("");
+        $("#formDelMember")[0].reset();
     });
 </script>
 @endsection
