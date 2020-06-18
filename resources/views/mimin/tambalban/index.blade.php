@@ -303,6 +303,20 @@
         var status = $('#statustb').is(":checked");
         var tubles = $('#tublestb').is(":checked");
 
+        var str1 = jambuka.split(':');
+        var second1 = parseInt(str1[0] * 3600 + str1[1] * 60);
+
+        var str2 = jamtutup.split(':');
+        var second2 = parseInt(str2[0] * 3600 + str2[1] * 60);
+
+        var totalsecond = second2 - second1;
+        var fulltime;
+        if (totalsecond >= 72000) {
+            fulltime = true;
+        } else {
+            fulltime = false;
+        }
+
         console.log($('#statustb').is(":checked"));
         console.log($('#tublestb').is(":checked"));
 
@@ -328,8 +342,9 @@
             longitude: longitude,
             status: status,
             tubles: tubles,
+            fulltime: fulltime,
             fotobengkel: "http://shyntadarmawan.000webhostapp.com/assets/tb1.jpg",
-            created_time: Date.now()
+            createdtime: Date.now()
         })
         $("#formAddTambalBan input").val("");
         $("#formAddTambalBan")[0].reset();
@@ -381,6 +396,21 @@
             });
             return;
         }
+
+        var str1 = values[2].value.split(':');
+        var second1 = parseInt(str1[0] * 3600 + str1[1] * 60);
+
+        var str2 = values[3].value.split(':');
+        var second2 = parseInt(str2[0] * 3600 + str2[1] * 60);
+
+        var totalsecond = second2 - second1;
+        var fulltime;
+        if (totalsecond >= 72000) {
+            fulltime = true;
+        } else {
+            fulltime = false;
+        }
+
         var postData = {
             nama: values[0].value,
             alamat: values[1].value,
@@ -390,8 +420,9 @@
             longitude: values[5].value,
             status: $('#edstatustb').is(":checked"),
             tubles: $('#edtublestb').is(":checked"),
+            fulltime: fulltime,
             fotobengkel: "http://shyntadarmawan.000webhostapp.com/assets/tb1.jpg",
-            created_time: Date.now()
+            createdtime: Date.now()
         };
 
         var updates = {};

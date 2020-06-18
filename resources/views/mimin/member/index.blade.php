@@ -202,11 +202,11 @@
             $.each(value, function(index, value) {
                 if (value) {
                     htmls.push('<tr>\
-                <td>' + value.full_name + '</td>\
-        		<td>' + value.user_name + '</td>\
+                <td>' + value.fullname + '</td>\
+        		<td>' + value.username + '</td>\
         		<td>' + value.email + '</td>\
         		<td><button data-toggle="modal" data-target="#updateModal" class="btn btn-info updateData" data-id="' + index + '">Update</button>\
-        		<button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger removeData" data-id="' + index + '" data-fullname="' + value.full_name + '">Delete</button></td>\
+        		<button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger removeData" data-id="' + index + '" data-fullname="' + value.fullname + '">Delete</button></td>\
         	</tr>');
                 }
                 lastIndex = index;
@@ -274,12 +274,12 @@
 
     function createUsers(key, fullname, username, password, email) {
         firebase.database().ref('users/' + key).set({
-            full_name: fullname,
-            user_name: username,
+            fullname: fullname,
+            username: username,
             password: password,
             email: email,
             foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
-            created_time: Date.now()
+            createdtime: Date.now()
         })
         $("#formAddMember input").val("");
         iziToast.success({
@@ -309,8 +309,8 @@
             console.log(updateID)
             console.log(values)
             $('body').find("#edemail").val(values.email);
-            $('body').find("#edusername").val(values.user_name);
-            $('body').find("#edfullname").val(values.full_name);
+            $('body').find("#edusername").val(values.username);
+            $('body').find("#edfullname").val(values.fullname);
             $('body').find("#edpassword").val(values.password);
         });
     });
@@ -319,12 +319,12 @@
     $('#formUpdateMember').on('submit', function() {
         var values = $("#formUpdateMember").serializeArray();
         var postData = {
-            full_name: values[0].value,
-            user_name: values[1].value,
+            fullname: values[0].value,
+            username: values[1].value,
             email: values[2].value,
             password: values[3].value,
             foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
-            created_time: Date.now()
+            createdtime: Date.now()
         };
 
         var updates = {};

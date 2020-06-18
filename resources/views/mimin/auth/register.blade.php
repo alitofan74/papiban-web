@@ -148,12 +148,12 @@
 
   function createUsers(key, fullname, username, password, email) {
        firebase.database().ref('users/' + key).set({
-      full_name: fullname,
-      user_name: username,
+      fullname: fullname,
+      username: username,
       password: password,
       email: email,
       foto: "http://shyntadarmawan.000webhostapp.com/assets/user.png",
-      created_time: Date.now()
+      createdtime: Date.now()
     })
     $("#formRegister input").val("");
     $("#formRegister")[0].reset();

@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group">
                         <label>Rating</label>
-                        <input type="number" step="0.1" min="0" max="10" class="form-control" required name="rating">
+                        <input type="number" step="0.1" min="0" max="5" class="form-control" required name="rating">
                     </div>
 
                 </div>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="form-group">
                         <label>Rating</label>
-                        <input type="number" min="0" max="10" step="0.1" class="form-control" required name="rating" id="edRating">
+                        <input type="number" min="0" max="5" step="0.1" class="form-control" required name="rating" id="edRating">
                     </div>
 
                 </div>
@@ -170,7 +170,7 @@
             console.log(value)
             $.each(value, function(index, value) {
                 if (value) {
-                    htmls.push('<option value="' + index + '">' + value.full_name + '</option>');
+                    htmls.push('<option value="' + index + '">' + value.fullname + '</option>');
                 }
             });
             $('#selUser').html(htmls);
@@ -212,7 +212,7 @@
             userID: user,
             tbID: tb,
             rating: rating,
-            created_time: Date.now()
+            createdtime: Date.now()
         })
         $("#formAddRating input").val("");
         $("#formAddRating")[0].reset();
@@ -258,7 +258,7 @@
             userID: values[0].value,
             tbID: values[1].value,
             rating: values[2].value,
-            created_time: Date.now()
+            createdtime: Date.now()
         };
 
         var updates = {};

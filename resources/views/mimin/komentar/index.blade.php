@@ -170,7 +170,7 @@
             console.log(value)
             $.each(value, function(index, value) {
                 if (value) {
-                    htmls.push('<option value="' + index + '">' + value.full_name + '</option>');
+                    htmls.push('<option value="' + index + '">' + value.fullname + '</option>');
                 }
             });
             $('#selUser').html(htmls);
@@ -212,7 +212,7 @@
             userID: user,
             tbID: tb,
             komentar: komentar,
-            created_time: Date.now()
+            createdtime: Date.now()
         })
         $("#formAddKomentar input").val("");
         $("#formAddKomentar")[0].reset();
@@ -258,7 +258,7 @@
             userID: values[0].value,
             tbID: values[1].value,
             komentar: values[2].value,
-            created_time: Date.now()
+            createdtime: Date.now()
         };
 
         var updates = {};
